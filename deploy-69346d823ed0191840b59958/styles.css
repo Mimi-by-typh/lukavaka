@@ -1,0 +1,471 @@
+/* Базовые стили и переменные */
+:root {
+    --bg-dark: #0d0d0d;
+    --bg-alt: #111;
+    --accent-red: #ff0000;
+    --accent-red-dark: #d32f2f;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --card-bg: #000000;
+    --border-gradient-start: #000000;
+    --border-gradient-end: #ff0000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Анимированный фон */
+#backgroundCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--bg-dark);
+}
+
+.hashtag {
+    position: absolute;
+    color: var(--accent-red);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    opacity: 0.3;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    animation: moveDiagonal 15s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes moveDiagonal {
+    0% {
+        transform: translate(-100px, -100px);
+    }
+    100% {
+        transform: translate(calc(100vw + 100px), calc(100vh + 100px));
+    }
+}
+
+/* Основной контейнер */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Центральная карточка */
+.main-card {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.card-border {
+    border-radius: 20px;
+    padding: 3px;
+    background: linear-gradient(45deg, var(--border-gradient-start), var(--border-gradient-end));
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.card-content {
+    background: var(--card-bg);
+    border-radius: 17px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Визуализация лавовой лампы */
+.lava-lamp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+/* Контент поверх лавовой лампы */
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--text-primary), var(--accent-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.description p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+/* Система авторизации */
+.auth-section {
+    margin-bottom: 30px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.auth-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.google-btn {
+    background: #4285f4;
+}
+
+.google-btn:hover {
+    background: #357ae8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+}
+
+.telegram-btn {
+    background: #0088cc;
+}
+
+.telegram-btn:hover {
+    background: #0077b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+}
+
+.btn-icon {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Telegram Widget контейнер */
+.telegram-widget-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 25px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid var(--accent-red);
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 0, 0, 0.3);
+}
+
+/* Система комментариев */
+.comments-section {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.comments-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    min-height: 80px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.comment-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background: var(--accent-red);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent-red-dark);
+    transform: translateY(-1px);
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.login-prompt a {
+    color: var(--accent-red);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+.comments-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.comment-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.comment-text {
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Индикатор онлайн пользователей */
+.online-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.online-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+#onlineCount {
+    color: var(--accent-red);
+    font-weight: bold;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .card-content {
+        padding: 25px;
+        min-height: 350px;
+    }
+    
+    .title {
+        font-size: 2.2em;
+    }
+    
+    .content-overlay {
+        padding: 20px;
+    }
+    
+    .comments-section {
+        padding: 20px;
+    }
+    
+    .auth-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .auth-btn {
+        width: 200px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-content {
+        padding: 20px;
+        min-height: 300px;
+    }
+    
+    .title {
+        font-size: 1.8em;
+    }
+    
+    .content-overlay {
+        padding: 15px;
+    }
+    
+    .description p {
+        font-size: 1em;
+    }
+    
+    .comments-section {
+        padding: 15px;
+    }
+    
+    .online-indicator {
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Стили для скроллбара */
+.comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 0, 0, 0.5);
+}

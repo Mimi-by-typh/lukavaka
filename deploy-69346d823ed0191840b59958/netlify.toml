@@ -1,0 +1,49 @@
+functionsDirectory = "/opt/build/repo/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+redirectsOrigin = "config"
+plugins = []
+headers = []
+
+[build]
+publish = "/opt/build/repo"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "echo 'No build command needed'"
+functions = "/opt/build/repo/netlify/functions"
+
+  [build.environment]
+  NODE_VERSION = "18"
+
+  [build.processing]
+
+    [build.processing.css]
+
+    [build.processing.html]
+
+    [build.processing.images]
+
+    [build.processing.js]
+
+  [build.services]
+
+[dev]
+command = "echo 'Starting development server...'"
+port = 3000
+publish = "."
+functions = "netlify/functions"
+
+[functions]
+
+  [functions."*"]
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
