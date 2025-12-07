@@ -1,0 +1,13 @@
+{
+  "name": "lika-frizz",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  }
+}
