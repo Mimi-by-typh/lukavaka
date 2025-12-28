@@ -92,6 +92,13 @@ nav {
     background: linear-gradient(135deg, var(--accent), #ec4899);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo img {
+    -webkit-text-fill-color: initial;
 }
 
 .nav-links {
