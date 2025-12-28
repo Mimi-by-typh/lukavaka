@@ -1,0 +1,428 @@
+/* ============================================
+   ADMIN PANEL ADVANCED EFFECTS
+   ============================================ */
+
+/* Animated Gradient Background for Admin */
+@keyframes adminGradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background: linear-gradient(-45deg,
+            rgba(99, 102, 241, 0.04),
+            rgba(168, 85, 247, 0.04),
+            rgba(59, 130, 246, 0.04),
+            rgba(99, 102, 241, 0.04));
+    background-size: 400% 400%;
+    animation: adminGradientShift 20s ease infinite;
+    pointer-events: none;
+}
+
+/* Admin Morphing Blobs */
+.admin-blob {
+    position: fixed;
+    opacity: 0.08;
+    filter: blur(100px);
+    animation: morphBlob 30s ease-in-out infinite;
+    pointer-events: none;
+    will-change: transform, border-radius;
+    z-index: 0;
+}
+
+@keyframes morphBlob {
+
+    0%,
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    33% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: translate(40px, -40px) scale(1.1) rotate(120deg);
+    }
+
+    66% {
+        border-radius: 50% 60% 40% 60% / 40% 50% 60% 50%;
+        transform: translate(-40px, 40px) scale(0.9) rotate(240deg);
+    }
+}
+
+.admin-blob-1 {
+    top: -10%;
+    right: 10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.9) 0%, transparent 70%);
+    animation-delay: 0s;
+}
+
+.admin-blob-2 {
+    bottom: 10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.9) 0%, transparent 70%);
+    animation-delay: 10s;
+}
+
+.admin-blob-3 {
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.7) 0%, transparent 70%);
+    animation-delay: 20s;
+}
+
+/* Ensure content is above blobs */
+.admin-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Enhanced Glassmorphism for Admin Cards */
+.stat-card,
+.admin-section,
+.admin-login-form,
+.admin-header {
+    position: relative;
+    background: rgba(20, 20, 20, 0.7) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 3D Stat Card Effects */
+.stat-card {
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0) 0%,
+            rgba(99, 102, 241, 0.15) 50%,
+            rgba(99, 102, 241, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 0;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-value {
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.stat-card:hover .stat-value {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.8));
+}
+
+/* Enhanced Admin Sections */
+.admin-section {
+    overflow: hidden;
+}
+
+.admin-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.03),
+            transparent);
+    transition: left 0.6s;
+}
+
+.admin-section:hover::after {
+    left: 100%;
+}
+
+/* Enhanced Tables */
+.comments-table {
+    position: relative;
+}
+
+.comments-table tr {
+    transition: all 0.3s ease;
+}
+
+.comments-table tr:hover {
+    background: rgba(99, 102, 241, 0.08) !important;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Buttons */
+.admin-btn,
+.btn-delete,
+.btn-edit,
+.btn-ban,
+.btn-unban {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.admin-btn::after,
+.btn-delete::after,
+.btn-edit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.admin-btn:active::after,
+.btn-delete:active::after,
+.btn-edit:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+}
+
+.admin-btn:hover,
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(99, 102, 241, 0.4);
+}
+
+.btn-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(239, 68, 68, 0.4);
+}
+
+/* Loading Animation */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Success/Error Messages with Animation */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.admin-success,
+.admin-error {
+    animation: slideInRight 0.4s ease-out;
+}
+
+/* Enhanced Modal */
+.modal-content {
+    animation: modalAppear 0.3s ease-out;
+    background: rgba(20, 20, 20, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Enhanced Login Form */
+.admin-login-form {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Input Focus Glow */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: rgba(99, 102, 241, 0.6) !important;
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.1),
+        0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Admin Header Glow */
+.admin-title {
+    animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));
+    }
+}
+
+/* Logout Button Enhanced */
+.admin-logout {
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.admin-logout:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
+}
+
+/* Stat Cards Icon Animation */
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.stat-card:hover .stat-value {
+    animation: iconFloat 2s ease-in-out infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+/* Data Visualization Enhancement */
+.admin-stats {
+    perspective: 1000px;
+}
+
+.stat-card {
+    transform-style: preserve-3d;
+}
+
+/* Add shimmer effect to sections */
+.admin-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.03) 50%,
+            transparent 70%);
+    animation: shimmer 8s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}

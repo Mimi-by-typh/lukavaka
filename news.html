@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости - Luka Frizz</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="theme-switcher.css">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Luka Frizz</a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="index.html#shop">Магазин</a>
+                <a href="news.html" class="active">Новости</a>
+                <a href="index.html#community">Сообщество</a>
+                <span class="nav-glider"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="news-page">
+        <a href="index.html" class="back-link">← Назад</a>
+        
+        <h1 class="section-title">📰 Новости</h1>
+        <p class="section-sub">Последние обновления от Царя</p>
+
+        <div class="news-list">
+            <article class="news-card">
+                <div class="news-header">
+                    <h2>🚀 Запуск сайта!</h2>
+                    <span class="news-date">28 декабря 2024</span>
+                </div>
+                <p>Йоу, сайт наконец-то запущен! Теперь все новости, обновления и движухи будут тут. Подписывайтесь, следите, не пропустите ничего важного.</p>
+                <p style="margin-top: 1rem;">VIP DEF уже доступен — осталось 15 мест. Кто первый — тот и папочка.</p>
+                <div class="news-tags">
+                    <span class="tag tag-important">Важно</span>
+                    <span class="tag">Запуск</span>
+                </div>
+            </article>
+
+            <article class="news-card">
+                <div class="news-header">
+                    <h2>🛡️ VIP DEF открыт</h2>
+                    <span class="news-date">28 декабря 2024</span>
+                </div>
+                <p>VIP защита от клана Europe и Luka Frizz теперь доступна. 100 звёзд в месяц — и тебя не пошлют нахуй. Плюс возможность сесть на обучение в КМ.</p>
+                <p style="margin-top: 1rem;">Свободных мест: 15. Больше плюсов нет, но и этого достаточно.</p>
+                <div class="news-tags">
+                    <span class="tag tag-new">Новинка</span>
+                    <span class="tag">VIP</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script src="theme-switcher.js"></script>
+    <script>
+        // Nav glider
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const glider = document.querySelector('.nav-glider');
+        
+        function moveGlider(el) {
+            glider.style.width = el.offsetWidth + 'px';
+            glider.style.left = el.offsetLeft + 'px';
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => moveGlider(link));
+        });
+        
+        document.querySelector('.nav-links').addEventListener('mouseleave', () => {
+            const active = document.querySelector('.nav-links a.active');
+            if (active) moveGlider(active);
+        });
+        
+        const activeLink = document.querySelector('.nav-links a.active');
+        if (activeLink) moveGlider(activeLink);
+    </script>
+</body>
+</html>

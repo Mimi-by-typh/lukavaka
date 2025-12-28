@@ -1,0 +1,140 @@
+/* Custom Google Sign-In Button (Theme-aware) */
+
+/* Hide default Google button completely */
+#googleSignInButton {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    pointer-events: none !important;
+}
+
+/* Custom button container */
+.custom-google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-google-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        0 0 0 3px var(--primary-glow);
+}
+
+.custom-google-btn:active {
+    transform: translateY(0);
+}
+
+/* Google icon */
+.google-icon-custom {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Theme-specific button styles */
+:root[data-theme="default"] .custom-google-btn {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+:root[data-theme="default"] .custom-google-btn:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+:root[data-theme="comfort"] .custom-google-btn {
+    border-color: rgba(124, 127, 240, 0.25);
+    background: rgba(25, 25, 28, 0.4);
+}
+
+:root[data-theme="comfort"] .custom-google-btn:hover {
+    background: rgba(124, 127, 240, 0.08);
+}
+
+:root[data-theme="midnight"] .custom-google-btn {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(15, 20, 35, 0.5);
+}
+
+:root[data-theme="midnight"] .custom-google-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+:root[data-theme="sunset"] .custom-google-btn {
+    border-color: rgba(249, 115, 22, 0.3);
+    background: rgba(35, 20, 15, 0.5);
+}
+
+:root[data-theme="sunset"] .custom-google-btn:hover {
+    background: rgba(249, 115, 22, 0.1);
+}
+
+:root[data-theme="ocean"] .custom-google-btn {
+    border-color: rgba(20, 184, 166, 0.3);
+    background: rgba(15, 30, 35, 0.5);
+}
+
+:root[data-theme="ocean"] .custom-google-btn:hover {
+    background: rgba(20, 184, 166, 0.1);
+}
+
+/* Loading state */
+.custom-google-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.custom-google-btn.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 100%;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .custom-google-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .google-icon-custom {
+        width: 16px;
+        height: 16px;
+    }
+
+    .google-btn-text {
+        display: none;
+    }
+}

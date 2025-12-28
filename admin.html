@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель - Lika Frizz</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-effects.css">
+    <style>
+        /* Стили для админ-панели */
+        .admin-container {
+            min-height: 100vh;
+            background: var(--bg-dark);
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-logout {
+            padding: 0.5rem 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+            border-radius: 6px;
+            color: var(--accent-red);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin-logout:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .admin-login-form {
+            max-width: 400px;
+            margin: 10rem auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .admin-login-form h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .admin-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .admin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .comments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comments-table th,
+        .comments-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comments-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .comments-table td {
+            color: var(--text-primary);
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-delete {
+            padding: 0.5rem 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+            border-radius: 6px;
+            color: var(--accent-red);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .admin-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+        }
+
+        .admin-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            color: #22c55e;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            margin: 5% auto;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Форма входа -->
+    <div id="loginSection" class="admin-container">
+        <div class="admin-login-form">
+            <h2>Вход в админ-панель</h2>
+            <div id="loginError" class="admin-error" style="display: none;"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminEmail">Email админа</label>
+                    <input type="email" id="adminEmail" required placeholder="admin@example.com">
+                </div>
+                <button type="submit" class="admin-btn">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Админ панель -->
+    <div id="adminPanel" class="admin-container" style="display: none;">
+        <div class="admin-header">
+            <h1 class="admin-title">Админ панель</h1>
+            <div>
+                <span id="adminEmailDisplay" style="margin-right: 1rem; color: var(--text-secondary);"></span>
+                <button class="admin-logout" onclick="logout()">Выйти</button>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-label">Всего комментариев</div>
+                <div class="stat-value" id="statComments">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Онлайн пользователей</div>
+                <div class="stat-value" id="statOnline">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Админов</div>
+                <div class="stat-value" id="statAdmins">0</div>
+            </div>
+        </div>
+
+        <!-- Управление админами -->
+        <div class="admin-section">
+            <h2 class="section-title">Управление администраторами</h2>
+            <div id="adminsError" class="admin-error" style="display: none;"></div>
+            <div id="adminsSuccess" class="admin-success" style="display: none;"></div>
+
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="email" id="newAdminEmail" placeholder="Email нового админа"
+                    style="width: 100%; padding: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+            </div>
+            <button class="admin-btn" onclick="addAdmin()" style="width: auto; padding: 0.75rem 2rem;">Добавить
+                админа</button>
+
+            <div id="adminsList"
+                style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                <div class="loading">Загрузка списка админов...</div>
+            </div>
+        </div>
+
+        <!-- Форма добавления комментария -->
+        <div class="admin-section">
+            <h2 class="section-title">Добавить комментарий</h2>
+            <div id="commentFormError" class="admin-error" style="display: none;"></div>
+            <div id="commentFormSuccess" class="admin-success" style="display: none;"></div>
+            <div class="form-group">
+                <textarea id="adminCommentInput" placeholder="Напишите комментарий от имени админа..."
+                    style="width: 100%; min-height: 100px; padding: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+            </div>
+            <button class="admin-btn" onclick="submitAdminComment()">Отправить комментарий</button>
+        </div>
+
+        <!-- Управление ролями -->
+        <div class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="section-title" style="margin: 0;">Управление ролями</h2>
+                <button class="admin-btn" onclick="showCreateRoleModal()"
+                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">➕ Создать роль</button>
+            </div>
+            <div id="rolesError" class="admin-error" style="display: none;"></div>
+            <div id="rolesSuccess" class="admin-success" style="display: none;"></div>
+            <div id="rolesContainer"></div>
+        </div>
+
+        <!-- Управление пользователями -->
+        <div class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="section-title" style="margin: 0;">Управление пользователями</h2>
+                <button class="admin-btn" onclick="loadUsers()"
+                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">🔄 Обновить</button>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <input type="text" id="userSearchInput" placeholder="Поиск по имени или email..."
+                    style="width: 100%; padding: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+            </div>
+            <div id="usersError" class="admin-error" style="display: none;"></div>
+            <div id="usersSuccess" class="admin-success" style="display: none;"></div>
+            <div id="usersLoading" class="loading" style="display: none;">Загрузка...</div>
+            <div id="usersTableContainer"></div>
+        </div>
+
+        <!-- Управление комментариями -->
+        <div class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="section-title" style="margin: 0;">Управление комментариями</h2>
+                <button class="admin-btn" onclick="loadComments()"
+                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">🔄 Обновить</button>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <select id="commentStatusFilter"
+                    style="padding: 0.5rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary);">
+                    <option value="all">Все статусы</option>
+                    <option value="published">Опубликован</option>
+                    <option value="pending">На модерации</option>
+                    <option value="hidden">Скрыт</option>
+                    <option value="deleted">Удален</option>
+                </select>
+                <input type="text" id="commentSearchInput" placeholder="Поиск по тексту или автору..."
+                    style="flex: 1; min-width: 200px; padding: 0.5rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary);">
+                <button class="admin-btn" onclick="applyCommentFilters()"
+                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">🔍 Поиск</button>
+            </div>
+            <div id="commentsError" class="admin-error" style="display: none;"></div>
+            <div id="commentsSuccess" class="admin-success" style="display: none;"></div>
+            <div id="commentsLoading" class="loading" style="display: none;">Загрузка...</div>
+            <div id="commentsTableContainer"></div>
+        </div>
+
+        <!-- Настройки виджета -->
+        <div class="admin-section">
+            <h2 class="section-title">Настройки виджета комментариев</h2>
+            <div id="widgetSettingsError" class="admin-error" style="display: none;"></div>
+            <div id="widgetSettingsSuccess" class="admin-success" style="display: none;"></div>
+            <div id="widgetSettingsContainer"></div>
+        </div>
+
+        <!-- Экспорт данных -->
+        <div class="admin-section">
+            <h2 class="section-title">Экспорт данных</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Скачайте данные в формате JSON</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="admin-btn" onclick="exportComments()" style="width: auto; padding: 0.75rem 1.5rem;">📥
+                    Экспорт комментариев</button>
+                <button class="admin-btn" onclick="exportAdmins()" style="width: auto; padding: 0.75rem 1.5rem;">📥
+                    Экспорт админов</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно создания/редактирования роли -->
+    <div id="roleModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal" onclick="closeRoleModal()">&times;</span>
+            <h2 id="roleModalTitle">Создать роль</h2>
+            <div id="roleFormError" class="admin-error" style="display: none;"></div>
+            <div id="roleFormSuccess" class="admin-success" style="display: none;"></div>
+            <form id="roleForm" onsubmit="saveRole(event)">
+                <input type="hidden" id="roleIdInput">
+                <div class="form-group">
+                    <label>Название роли</label>
+                    <input type="text" id="roleNameInput" required placeholder="Например: Модератор">
+                </div>
+                <div class="form-group">
+                    <label>Цвет роли</label>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="color" id="roleColorInput" value="#6366f1"
+                            style="width: 80px; height: 40px; border: none; border-radius: 6px; cursor: pointer;">
+                        <input type="text" id="roleColorTextInput" value="#6366f1" placeholder="#6366f1"
+                            style="flex: 1; padding: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: monospace;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Иконка (URL или эмодзи)</label>
+                    <input type="text" id="roleIconInput" placeholder="👑 или https://example.com/icon.png">
+                </div>
+                <div class="form-group">
+                    <label>Приоритет (чем больше, тем выше)</label>
+                    <input type="number" id="rolePriorityInput" value="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="roleDisplaySeparateInput">
+                        Отображать роль отдельно (цветная полоска над именем)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Права:</label>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permComment" checked>
+                            Комментировать
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permEditOwn">
+                            Редактировать свои комментарии
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permDeleteOwn">
+                            Удалять свои комментарии
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permAttachMedia">
+                            Прикреплять медиа
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permBypassModeration">
+                            Обходить модерацию
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permModerate">
+                            Модерировать комментарии
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="permAdminPanel">
+                            Доступ к админ-панели
+                        </label>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="submit" class="admin-btn" style="flex: 1;">Сохранить</button>
+                    <button type="button" class="admin-btn" onclick="closeRoleModal()"
+                        style="flex: 1; background: var(--bg-alt); border: 1px solid var(--border-color);">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования пользователя -->
+    <div id="userEditModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal" onclick="closeUserEditModal()">&times;</span>
+            <h2>Редактировать пользователя</h2>
+            <div id="userEditError" class="admin-error" style="display: none;"></div>
+            <div id="userEditSuccess" class="admin-success" style="display: none;"></div>
+            <div id="userEditContainer"></div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="admin-effects.js"></script>
+</body>
+
+</html>

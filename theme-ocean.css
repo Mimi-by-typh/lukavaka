@@ -1,0 +1,24 @@
+/* Theme: Ocean */
+:root[data-theme="ocean"] {
+    --bg-dark: #0a1a1a;
+    --bg-card: rgba(15, 30, 35, 0.6);
+    --bg-glass: rgba(150, 255, 255, 0.02);
+    --primary: #14b8a6;
+    --primary-glow: rgba(20, 184, 166, 0.3);
+    --secondary: #06b6d4;
+    --secondary-glow: rgba(6, 182, 212, 0.3);
+    --accent: #22d3ee;
+    --text-main: #cffafe;
+    --text-muted: #67e8f9;
+    --text-dim: #0e7490;
+    --blob-opacity: 0.09;
+    --particle-brightness: 0.5;
+}
+
+.morphing-blob {
+    opacity: var(--blob-opacity, 0.09) !important;
+}
+
+.particle {
+    background: rgba(255, 255, 255, var(--particle-brightness, 0.5)) !important;
+}

@@ -1,0 +1,24 @@
+/* Theme: Eye Comfort */
+:root[data-theme="comfort"] {
+    --bg-dark: #0a0a0a;
+    --bg-card: rgba(25, 25, 28, 0.5);
+    --bg-glass: rgba(255, 255, 255, 0.02);
+    --primary: #7c7ff0;
+    --primary-glow: rgba(124, 127, 240, 0.25);
+    --secondary: #b47ff7;
+    --secondary-glow: rgba(180, 127, 247, 0.25);
+    --accent: #f098b8;
+    --text-main: #e8e8e8;
+    --text-muted: #a0a5b0;
+    --text-dim: #5a5f6b;
+    --blob-opacity: 0.06;
+    --particle-brightness: 0.4;
+}
+
+.morphing-blob {
+    opacity: var(--blob-opacity, 0.06) !important;
+}
+
+.particle {
+    background: rgba(255, 255, 255, var(--particle-brightness, 0.4)) !important;
+}

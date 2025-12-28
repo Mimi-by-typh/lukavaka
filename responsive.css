@@ -1,0 +1,366 @@
+/* ============================================
+   RESPONSIVE DESIGN - Mobile, Tablet, Desktop
+   ============================================ */
+
+/* ============= MOBILE FIRST APPROACH ============= */
+
+/* Extra small devices (phones, 320px and up) */
+@media (max-width: 480px) {
+
+    /* Typography */
+    html {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.75rem !important;
+    }
+
+    h2 {
+        font-size: 1.4rem !important;
+    }
+
+    h3 {
+        font-size: 1.2rem !important;
+    }
+
+    /* Navigation */
+    .nav-container {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-auth {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    /* Theme switcher */
+    .theme-switcher {
+        margin-right: 0.5rem;
+    }
+
+    .theme-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .theme-label {
+        display: none;
+    }
+
+    .theme-dropdown {
+        left: 0;
+        right: 0;
+        min-width: auto;
+        width: calc(100vw - 2rem);
+        margin: 0 1rem;
+    }
+
+    /* Google button */
+    .custom-google-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .google-btn-text {
+        display: none;
+    }
+
+    /* Hero section */
+    .hero {
+        padding: 2rem 1rem;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 1.75rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Sections */
+    .section {
+        padding: 2rem 1rem;
+    }
+
+    /* Pricing cards */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .pricing-card {
+        padding: 1.5rem;
+    }
+
+    .price {
+        font-size: 2rem !important;
+    }
+
+    /* Feature cards */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.25rem;
+    }
+
+    /* Comments */
+    .comments-section {
+        padding: 1rem;
+    }
+
+    .comment-form textarea {
+        font-size: 14px;
+    }
+
+    .comment-card {
+        padding: 1rem;
+    }
+
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    /* Glass panels */
+    .glass-panel {
+        padding: 1.25rem;
+        margin: 0 0.5rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    /* Online counter */
+    .online-indicator {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    /* Blobs - reduce for performance */
+    .morphing-blob {
+        width: 250px;
+        height: 250px;
+        opacity: 0.05 !important;
+    }
+}
+
+/* Small devices (landscape phones, 481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
+    .nav-container {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .theme-label {
+        display: none;
+    }
+
+    .google-btn-text {
+        display: inline;
+    }
+
+    .hero {
+        padding: 3rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .morphing-blob {
+        width: 350px;
+        height: 350px;
+        opacity: 0.08 !important;
+    }
+}
+
+/* Medium devices (tablets, 769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-container {
+        padding: 1rem 2rem;
+    }
+
+    .hero {
+        padding: 4rem 2rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section {
+        padding: 3rem 2rem;
+    }
+}
+
+/* Large devices (desktops, 1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Extra large devices (large desktops, 1441px and up) */
+@media (min-width: 1441px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    html {
+        font-size: 18px;
+    }
+}
+
+/* ============= TOUCH DEVICE OPTIMIZATIONS ============= */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Larger touch targets */
+    .btn-primary,
+    .theme-button,
+    .custom-google-btn,
+    .theme-option {
+        min-height: 44px;
+    }
+
+    /* Remove hover effects that don't work on touch */
+    .pricing-card:hover,
+    .feature-card:hover {
+        transform: none;
+    }
+
+    /* Keep active states for touch feedback */
+    .btn-primary:active,
+    .theme-button:active,
+    .custom-google-btn:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ============= LANDSCAPE ORIENTATION ============= */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 1.5rem 2rem;
+    }
+
+    .nav-container {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* ============= HIGH DPI SCREENS ============= */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    /* Sharper borders */
+    .glass-panel,
+    .pricing-card,
+    .feature-card {
+        border-width: 0.5px;
+    }
+}
+
+/* ============= REDUCED MOTION ============= */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .morphing-blob {
+        display: none;
+    }
+
+    .particle {
+        display: none;
+    }
+}
+
+/* ============= DARK MODE PREFERENCE ============= */
+@media (prefers-color-scheme: dark) {
+
+    /* Already dark theme, but ensure consistency */
+    :root {
+        color-scheme: dark;
+    }
+}
+
+/* ============= PRINT STYLES ============= */
+@media print {
+
+    .morphing-blob,
+    .particle,
+    .nav-container,
+    .online-indicator,
+    .theme-switcher {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .glass-panel,
+    .pricing-card,
+    .feature-card {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+}

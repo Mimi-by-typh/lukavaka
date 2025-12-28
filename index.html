@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luka Frizz - Царь</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="theme-switcher.css">
+    <link rel="stylesheet" href="google-button-themes.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">Luka Frizz</div>
+            <div class="nav-links">
+                <a href="#home" class="active">Главная</a>
+                <a href="#shop">Магазин</a>
+                <a href="news.html">Новости</a>
+                <a href="#community">Сообщество</a>
+                <span class="nav-glider"></span>
+            </div>
+            <div class="nav-auth">
+                <div id="authButtons">
+                    <div id="googleSignInButton"></div>
+                </div>
+                <div id="userInfo">
+                    <a href="#" id="profileLink">
+                        <img id="userAvatar" src="" alt="">
+                    </a>
+                    <button id="logoutBtn" class="btn btn-ghost">Выйти</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>👑</span> Царь всея интернета
+            </div>
+            <h1>Luka Frizz</h1>
+            <p>Повелитель ака сильнейшее существо этой планеты.<br>Пресеты • NFT • Вкач • И прочая движуха</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary">Магазин</a>
+                <a href="https://t.me/lukafrizz" class="btn btn-ghost">Связаться</a>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🐌</div>
+                    <h3>Медленная работа</h3>
+                    <p>Для rekit, rsvd, V, freak</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔓</div>
+                    <h3>Безопасность</h3>
+                    <p>Нет</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">👑</div>
+                    <h3>Качество</h3>
+                    <p>Как захочу я</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="shop" id="shop">
+        <h2 class="section-title">Магазин</h2>
+        <p class="section-sub">От клана Europe и Luka Frizz</p>
+
+        <div class="cards">
+            <div class="card featured">
+                <div class="card-badge">15 мест</div>
+                <h3>🛡️ VIP DEF</h3>
+                <div class="card-price">100 ⭐ <span>/мес</span></div>
+                <ul>
+                    <li>Тебя не пошлют нахуй</li>
+                    <li>Обучение в КМ</li>
+                    <li>Больше плюсов нет</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Купить</button>
+            </div>
+
+            <div class="card">
+                <h3>🛒 Товары</h3>
+                <div class="card-price">от 25 ⭐</div>
+                <ul>
+                    <li>Пресеты</li>
+                    <li>NFT и подарки</li>
+                    <li>Адобка</li>
+                    <li>Обучалка</li>
+                    <li>Физаки</li>
+                </ul>
+                <button class="btn btn-ghost" style="width: 100%;">Написать</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="community" id="community">
+        <h2 class="section-title">Сообщество</h2>
+        <p class="section-sub">Общайся с единомышленниками</p>
+
+        <div id="commentForm" class="comment-box" style="display: none;">
+            <textarea id="commentInput" placeholder="Напиши что-нибудь..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="charCount" style="color: var(--text-dim); font-size: 0.85rem;">0/500</span>
+                <button id="submitComment" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+
+        <div id="loginPrompt" class="login-prompt">
+            <p style="margin-bottom: 1rem; color: var(--text-dim);">Войди чтобы писать</p>
+            <button id="promptLogin" class="btn btn-ghost">Войти через Google</button>
+        </div>
+
+        <div id="commentsList" class="comments-list"></div>
+        
+        <div id="loadMoreContainer" style="text-align: center; margin-top: 2rem; display: none;">
+            <button id="loadMoreBtn" class="btn btn-ghost">Загрузить ещё</button>
+        </div>
+    </section>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="profile-banner">
+                <img id="profileAvatar" src="" alt="" class="profile-avatar-large">
+                <h2 id="profileName">User</h2>
+                <p id="profileEmail" style="color: var(--text-dim);">email</p>
+            </div>
+            <input type="text" id="profileUsernameInput" class="profile-input" placeholder="Имя">
+            <input type="url" id="profileAvatarUrlInput" class="profile-input" placeholder="URL аватара">
+            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button id="saveProfileBtn" class="btn btn-primary" style="display: none;">Сохранить</button>
+                <button id="cancelEditBtn" class="btn btn-ghost" style="display: none;">Отмена</button>
+                <button id="profileLogoutBtn" class="btn btn-ghost" style="color: #ef4444;">Выйти</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="online">
+        <div class="online-dot"></div>
+        <span>Онлайн: <span id="onlineCount">1</span></span>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="theme-switcher.js"></script>
+    <script src="custom-google-button.js"></script>
+    <script>
+        // Nav glider
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const glider = document.querySelector('.nav-glider');
+        
+        function moveGlider(el) {
+            glider.style.width = el.offsetWidth + 'px';
+            glider.style.left = el.offsetLeft + 'px';
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => moveGlider(link));
+            link.addEventListener('click', () => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+        
+        document.querySelector('.nav-links').addEventListener('mouseleave', () => {
+            const active = document.querySelector('.nav-links a.active');
+            if (active) moveGlider(active);
+        });
+        
+        // Init glider position
+        const activeLink = document.querySelector('.nav-links a.active');
+        if (activeLink) moveGlider(activeLink);
+    </script>
+</body>
+</html>

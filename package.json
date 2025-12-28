@@ -1,0 +1,14 @@
+{
+  "name": "lika-frizz",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch api/test.js",
+    "start": "node api/test.js"
+  },
+  "dependencies": {
+    "@vercel/kv": "^0.2.0",
+    "@vercel/node": "^3.0.0",
+    "redis": "^5.10.0"
+  }
+}

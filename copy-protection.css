@@ -1,0 +1,117 @@
+/* ============================================
+   COPY PROTECTION STYLES
+   ============================================ */
+
+/* Disable text selection globally */
+* {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Re-enable for input fields */
+input,
+textarea,
+[contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Disable image dragging */
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+/* Prevent text highlighting with pseudo-element */
+*::selection {
+    background: transparent;
+    color: inherit;
+}
+
+*::-moz-selection {
+    background: transparent;
+    color: inherit;
+}
+
+/* Copyright notice overlay (subtle) */
+body::after {
+    content: '© 2024 Lika Frizz - All Rights Reserved';
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    z-index: 10000;
+    font-family: monospace;
+}
+
+/* Prevent SVG manipulation */
+svg {
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Re-enable pointer events for interactive elements */
+a,
+button,
+input,
+textarea,
+select,
+[onclick],
+[role="button"] {
+    pointer-events: auto !important;
+}
+
+/* Add no-copy cursor hint */
+.no-copy {
+    cursor: not-allowed !important;
+}
+
+/* Protect code blocks if any */
+pre,
+code {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Print protection (optional - makes content invisible when printing) */
+@media print {
+    body {
+        display: none !important;
+    }
+
+    body::before {
+        content: 'Printing is disabled for copyright protection';
+        display: block;
+        text-align: center;
+        padding: 50px;
+        font-size: 24px;
+    }
+}
+
+/* DevTools detection indicator (optional) */
+@media (min-height: 0px) {
+    .devtools-warning {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(239, 68, 68, 0.95);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        font-weight: bold;
+        z-index: 99999;
+        display: none;
+    }
+}

@@ -1,0 +1,77 @@
+/* Eye Comfort Enhancements - Additional Styles */
+
+/* Smoother text rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Better line height for readability */
+body {
+    line-height: 1.7;
+}
+
+p {
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+}
+
+/* Softer focus states */
+*:focus {
+    outline: 2px solid rgba(124, 127, 240, 0.4);
+    outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Softer shadows */
+.glass-panel,
+.pricing-card,
+.feature-card {
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Reduce glow intensity on hover */
+.btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(124, 127, 240, 0.25) !important;
+}
+
+/* Softer neon effects */
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 8px rgba(124, 127, 240, 0.3),
+            0 0 16px rgba(124, 127, 240, 0.2);
+    }
+
+    50% {
+        text-shadow:
+            0 0 16px rgba(124, 127, 240, 0.4),
+            0 0 24px rgba(124, 127, 240, 0.3);
+    }
+}
+
+/* Comfortable gradient background */
+body::before {
+    opacity: 0.5 !important;
+}
+
+/* Reduce feature icon glow */
+.feature-card:hover .feature-icon {
+    filter: drop-shadow(0 0 12px rgba(124, 127, 240, 0.4)) !important;
+}

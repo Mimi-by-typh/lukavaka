@@ -1,0 +1,144 @@
+/* ============================================
+   THEME: DEFAULT (VIBRANT)
+   ============================================ */
+
+:root[data-theme="default"] {
+    /* Base Colors */
+    --bg-dark: #050505;
+    --bg-card: rgba(20, 20, 20, 0.6);
+    --bg-glass: rgba(255, 255, 255, 0.03);
+
+    /* Accents - Vibrant */
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    --secondary: #a855f7;
+    --secondary-glow: rgba(168, 85, 247, 0.4);
+    --accent: #ec4899;
+
+    /* Text */
+    --text-main: #ffffff;
+    --text-muted: #9ca3af;
+    --text-dim: #4b5563;
+
+    /* Effects */
+    --blob-opacity: 0.12;
+    --particle-brightness: 0.9;
+}
+
+/* ============================================
+   THEME: EYE COMFORT (SOFTER)
+   ============================================ */
+
+:root[data-theme="comfort"] {
+    /* Base Colors - Warmer */
+    --bg-dark: #0a0a0a;
+    --bg-card: rgba(25, 25, 28, 0.5);
+    --bg-glass: rgba(255, 255, 255, 0.02);
+
+    /* Accents - Desaturated */
+    --primary: #7c7ff0;
+    --primary-glow: rgba(124, 127, 240, 0.25);
+    --secondary: #b47ff7;
+    --secondary-glow: rgba(180, 127, 247, 0.25);
+    --accent: #f098b8;
+
+    /* Text - Softer */
+    --text-main: #e8e8e8;
+    --text-muted: #a0a5b0;
+    --text-dim: #5a5f6b;
+
+    /* Effects - Reduced */
+    --blob-opacity: 0.06;
+    --particle-brightness: 0.4;
+}
+
+/* ============================================
+   THEME: MIDNIGHT (DEEP BLUE)
+   ============================================ */
+
+:root[data-theme="midnight"] {
+    /* Base Colors - Blue tint */
+    --bg-dark: #0a0d1a;
+    --bg-card: rgba(15, 20, 35, 0.6);
+    --bg-glass: rgba(100, 150, 255, 0.02);
+
+    /* Accents - Cool blues */
+    --primary: #3b82f6;
+    --primary-glow: rgba(59, 130, 246, 0.3);
+    --secondary: #8b5cf6;
+    --secondary-glow: rgba(139, 92, 246, 0.3);
+    --accent: #06b6d4;
+
+    /* Text - Cool tone */
+    --text-main: #e0f2fe;
+    --text-muted: #94a3b8;
+    --text-dim: #475569;
+
+    /* Effects */
+    --blob-opacity: 0.10;
+    --particle-brightness: 0.7;
+}
+
+/* ============================================
+   THEME: SUNSET (WARM)
+   ============================================ */
+
+:root[data-theme="sunset"] {
+    /* Base Colors - Warm */
+    --bg-dark: #1a0a0a;
+    --bg-card: rgba(35, 20, 15, 0.6);
+    --bg-glass: rgba(255, 200, 150, 0.02);
+
+    /* Accents - Warm oranges/reds */
+    --primary: #f97316;
+    --primary-glow: rgba(249, 115, 22, 0.3);
+    --secondary: #ec4899;
+    --secondary-glow: rgba(236, 72, 153, 0.3);
+    --accent: #fbbf24;
+
+    /* Text - Warm tone */
+    --text-main: #fef3c7;
+    --text-muted: #d4a574;
+    --text-dim: #78563d;
+
+    /* Effects */
+    --blob-opacity: 0.11;
+    --particle-brightness: 0.6;
+}
+
+/* ============================================
+   THEME: OCEAN (TEAL)
+   ============================================ */
+
+:root[data-theme="ocean"] {
+    /* Base Colors - Ocean */
+    --bg-dark: #0a1a1a;
+    --bg-card: rgba(15, 30, 35, 0.6);
+    --bg-glass: rgba(150, 255, 255, 0.02);
+
+    /* Accents - Teal/Cyan */
+    --primary: #14b8a6;
+    --primary-glow: rgba(20, 184, 166, 0.3);
+    --secondary: #06b6d4;
+    --secondary-glow: rgba(6, 182, 212, 0.3);
+    --accent: #22d3ee;
+
+    /* Text - Cool aqua */
+    --text-main: #cffafe;
+    --text-muted: #67e8f9;
+    --text-dim: #0e7490;
+
+    /* Effects */
+    --blob-opacity: 0.09;
+    --particle-brightness: 0.5;
+}
+
+/* Apply blob opacity from theme */
+.morphing-blob {
+    opacity: var(--blob-opacity) !important;
+}
+
+/* Apply particle brightness from theme */
+.particle {
+    background: rgba(255, 255, 255, var(--particle-brightness)) !important;
+}

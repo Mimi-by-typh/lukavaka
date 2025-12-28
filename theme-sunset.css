@@ -1,0 +1,24 @@
+/* Theme: Sunset */
+:root[data-theme="sunset"] {
+    --bg-dark: #1a0a0a;
+    --bg-card: rgba(35, 20, 15, 0.6);
+    --bg-glass: rgba(255, 200, 150, 0.02);
+    --primary: #f97316;
+    --primary-glow: rgba(249, 115, 22, 0.3);
+    --secondary: #ec4899;
+    --secondary-glow: rgba(236, 72, 153, 0.3);
+    --accent: #fbbf24;
+    --text-main: #fef3c7;
+    --text-muted: #d4a574;
+    --text-dim: #78563d;
+    --blob-opacity: 0.11;
+    --particle-brightness: 0.6;
+}
+
+.morphing-blob {
+    opacity: var(--blob-opacity, 0.11) !important;
+}
+
+.particle {
+    background: rgba(255, 255, 255, var(--particle-brightness, 0.6)) !important;
+}
