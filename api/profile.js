@@ -40,17 +40,26 @@ module.exports = async (req, res) => {
             if (!userProfile) {
                 return res.status(200).json({
                     success: true,
+                    user: {
+                        id: user.id,
+                        username: user.username || user.firstName || 'User',
+                        avatar: user.photoUrl || user.avatar || null,
+                        email: user.email || null,
+                        provider: user.provider || 'google'
+                    },
                     profile: {
                         id: user.id,
                         username: user.username || user.firstName || 'User',
                         avatar: user.photoUrl || user.avatar || null,
-                        email: user.email || null
+                        email: user.email || null,
+                        provider: user.provider || 'google'
                     }
                 });
             }
 
             return res.status(200).json({
                 success: true,
+                user: userProfile,
                 profile: userProfile
             });
         }
@@ -110,6 +119,7 @@ module.exports = async (req, res) => {
 
             return res.status(200).json({
                 success: true,
+                user: updatedProfile,
                 profile: updatedProfile,
                 message: 'Profile updated successfully'
             });

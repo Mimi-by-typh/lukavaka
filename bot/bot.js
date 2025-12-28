@@ -3,8 +3,8 @@ const TelegramBot = require('node-telegram-bot-api');
 // ⚠️ ЗАМЕНИ НА СВОЙ ТОКЕН (после /revoke в BotFather)
 const BOT_TOKEN = '8368101860:AAHoMJT_EsaQ88fRbYuRim3JCNxm21V9DeA';
 
-// Твой Telegram ID для уведомлений (узнать можно через @userinfobot)
-const SELLER_ID = '7846290046';
+// Telegram ID для уведомлений (узнать можно через @userinfobot)
+const SELLER_IDS = ['7846290046', '6280225613'];
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
@@ -113,7 +113,10 @@ bot.on('message', async (msg) => {
             `🧾 ID платежа: \`${payment.telegram_payment_charge_id}\``;
         
         try {
-            await bot.sendMessage(SELLER_ID, sellerMessage, { parse_mode: 'Markdown' });
+            // Отправляем уведомление всем продавцам
+            for (const sellerId of SELLER_IDS) {
+                await bot.sendMessage(sellerId, sellerMessage, { parse_mode: 'Markdown' });
+            }
         } catch (e) {
             console.error('Не удалось отправить уведомление продавцу:', e);
         }

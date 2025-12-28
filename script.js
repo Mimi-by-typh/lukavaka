@@ -205,11 +205,8 @@ function initializeProfilePage() {
     const closeModal = document.querySelector('.close-modal');
     const profileLogoutBtn = document.getElementById('profileLogoutBtn');
     const avatarInput = document.getElementById('avatarInput');
-    const avatarEditBtn = document.querySelector('.avatar-edit-btn-banner');
     const saveProfileBtn = document.getElementById('saveProfileBtn');
-    const cancelEditBtn = document.getElementById('cancelEditBtn');
     const profileAvatarUrlInput = document.getElementById('profileAvatarUrlInput');
-    const resetAvatarBtn = document.getElementById('resetAvatarBtn');
 
     if (profileLink) {
         profileLink.addEventListener('click', (e) => {
@@ -239,33 +236,20 @@ function initializeProfilePage() {
         });
     }
 
-    if (avatarEditBtn) {
-        avatarEditBtn.addEventListener('click', () => {
-            if (avatarInput) {
-                avatarInput.click();
-            }
-        });
-    }
-
     if (avatarInput) {
         avatarInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    showNotification('Файл слишком большой (макс 2MB)');
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     const avatarUrl = event.target.result;
                     document.getElementById('profileAvatar').src = avatarUrl;
                     if (profileAvatarUrlInput) {
                         profileAvatarUrlInput.value = avatarUrl;
-                    }
-                    if (saveProfileBtn) {
-                        saveProfileBtn.style.display = 'inline-block';
-                    }
-                    if (resetAvatarBtn) {
-                        resetAvatarBtn.style.display = 'inline-block';
-                    }
-                    if (cancelEditBtn) {
-                        cancelEditBtn.style.display = 'inline-block';
                     }
                 };
                 reader.readAsDataURL(file);
@@ -276,17 +260,8 @@ function initializeProfilePage() {
     if (profileAvatarUrlInput) {
         profileAvatarUrlInput.addEventListener('input', (e) => {
             const url = e.target.value.trim();
-            if (url) {
+            if (url && (url.startsWith('http') || url.startsWith('data:'))) {
                 document.getElementById('profileAvatar').src = url;
-                if (saveProfileBtn) {
-                    saveProfileBtn.style.display = 'inline-block';
-                }
-                if (resetAvatarBtn) {
-                    resetAvatarBtn.style.display = 'inline-block';
-                }
-                if (cancelEditBtn) {
-                    cancelEditBtn.style.display = 'inline-block';
-                }
             }
         });
     }
@@ -294,26 +269,6 @@ function initializeProfilePage() {
     if (saveProfileBtn) {
         saveProfileBtn.addEventListener('click', async () => {
             await saveUserProfile();
-        });
-    }
-
-    if (cancelEditBtn) {
-        cancelEditBtn.addEventListener('click', () => {
-            showProfilePage();
-            if (saveProfileBtn) saveProfileBtn.style.display = 'none';
-            if (resetAvatarBtn) resetAvatarBtn.style.display = 'none';
-            cancelEditBtn.style.display = 'none';
-        });
-    }
-
-    if (resetAvatarBtn) {
-        resetAvatarBtn.addEventListener('click', () => {
-            const defaultAvatar = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser.username || 'User');
-            document.getElementById('profileAvatar').src = defaultAvatar;
-            if (profileAvatarUrlInput) {
-                profileAvatarUrlInput.value = defaultAvatar;
-            }
-            if (saveProfileBtn) saveProfileBtn.style.display = 'inline-block';
         });
     }
 }
@@ -339,70 +294,61 @@ async function loadUserProfile() {
         });
 
         const data = await response.json();
-
-        if (data.success && data.user) {
-            const user = data.user;
-            const avatar = user.avatar || currentUser.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.username || 'User');
-            const username = user.username || currentUser.username || currentUser.firstName || 'User';
-            const email = user.email || currentUser.email || 'Не указан';
-            const provider = user.provider || currentUser.provider || 'unknown';
-
-            document.getElementById('profileAvatar').src = avatar;
-            document.getElementById('profileName').textContent = username;
-            document.getElementById('profileEmail').textContent = email;
-            document.getElementById('profileUsernameInput').value = username;
-            document.getElementById('profileAvatarUrlInput').value = avatar;
-
-            const providerBadge = document.getElementById('profileProviderBadge');
-            if (providerBadge) {
-                providerBadge.textContent = provider === 'google' ? 'Google' : provider === 'telegram' ? 'Telegram' : 'Пользователь';
-            }
-        } else {
-            const avatar = currentUser.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser.username || 'User');
-            const username = currentUser.username || currentUser.firstName || 'User';
-            const email = currentUser.email || 'Не указан';
-            const provider = currentUser.provider || 'unknown';
-
-            document.getElementById('profileAvatar').src = avatar;
-            document.getElementById('profileName').textContent = username;
-            document.getElementById('profileEmail').textContent = email;
-            document.getElementById('profileUsernameInput').value = username;
-            document.getElementById('profileAvatarUrlInput').value = avatar;
-
-            const providerBadge = document.getElementById('profileProviderBadge');
-            if (providerBadge) {
-                providerBadge.textContent = provider === 'google' ? 'Google' : provider === 'telegram' ? 'Telegram' : 'Пользователь';
-            }
-        }
-    } catch (error) {
-        console.error('Error loading user profile:', error);
-        const avatar = currentUser.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser.username || 'User');
-        const username = currentUser.username || currentUser.firstName || 'User';
-        const email = currentUser.email || 'Не указан';
-        const provider = currentUser.provider || 'unknown';
+        
+        // API возвращает profile, не user
+        const profile = data.profile || data.user || currentUser;
+        
+        const avatar = profile.avatar || currentUser.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(profile.username || 'User');
+        const username = profile.username || currentUser.username || currentUser.firstName || 'User';
+        const email = profile.email || currentUser.email || '';
+        const provider = profile.provider || currentUser.provider || 'google';
 
         document.getElementById('profileAvatar').src = avatar;
         document.getElementById('profileName').textContent = username;
         document.getElementById('profileEmail').textContent = email;
         document.getElementById('profileUsernameInput').value = username;
-        document.getElementById('profileAvatarUrlInput').value = avatar;
+        document.getElementById('profileAvatarUrlInput').value = avatar.startsWith('https://ui-avatars') ? '' : avatar;
 
         const providerBadge = document.getElementById('profileProviderBadge');
         if (providerBadge) {
-            providerBadge.textContent = provider === 'google' ? 'Google' : provider === 'telegram' ? 'Telegram' : 'Пользователь';
+            const providerNames = { google: 'Google', telegram: 'Telegram' };
+            providerBadge.textContent = providerNames[provider] || 'Аккаунт';
         }
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        // Fallback к currentUser
+        const avatar = currentUser.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser.username || 'User');
+        document.getElementById('profileAvatar').src = avatar;
+        document.getElementById('profileName').textContent = currentUser.username || 'User';
+        document.getElementById('profileEmail').textContent = currentUser.email || '';
+        document.getElementById('profileUsernameInput').value = currentUser.username || '';
+        document.getElementById('profileAvatarUrlInput').value = '';
     }
 }
 
 async function saveUserProfile() {
-    if (!currentUser || !authToken) return;
+    if (!currentUser || !authToken) {
+        showNotification('Нужно войти в аккаунт');
+        return;
+    }
 
     const username = document.getElementById('profileUsernameInput').value.trim();
-    const avatar = document.getElementById('profileAvatarUrlInput').value.trim();
+    const avatarUrl = document.getElementById('profileAvatarUrlInput').value.trim();
 
     if (!username) {
-        showNotification('Имя пользователя не может быть пустым');
+        showNotification('Имя не может быть пустым');
         return;
+    }
+
+    if (username.length > 32) {
+        showNotification('Имя слишком длинное (макс 32 символа)');
+        return;
+    }
+
+    const saveBtn = document.getElementById('saveProfileBtn');
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Сохранение...';
     }
 
     try {
@@ -414,31 +360,35 @@ async function saveUserProfile() {
             },
             body: JSON.stringify({
                 username: username,
-                avatar: avatar || null
+                avatar: avatarUrl || null
             })
         });
 
         const data = await response.json();
 
         if (data.success) {
+            // Обновляем локальные данные
             currentUser.username = username;
-            currentUser.avatar = avatar || currentUser.avatar;
+            if (avatarUrl) {
+                currentUser.avatar = avatarUrl;
+            }
+            
+            // Обновляем UI
             updateAuthUI();
-            showProfilePage();
-            showNotification('Профиль успешно обновлен');
-
-            const saveProfileBtn = document.getElementById('saveProfileBtn');
-            const cancelEditBtn = document.getElementById('cancelEditBtn');
-            const resetAvatarBtn = document.getElementById('resetAvatarBtn');
-            if (saveProfileBtn) saveProfileBtn.style.display = 'none';
-            if (cancelEditBtn) cancelEditBtn.style.display = 'none';
-            if (resetAvatarBtn) resetAvatarBtn.style.display = 'none';
+            document.getElementById('profileName').textContent = username;
+            
+            showNotification('Профиль сохранён!');
         } else {
-            showNotification(data.error || 'Ошибка обновления профиля');
+            showNotification(data.error || 'Ошибка сохранения');
         }
     } catch (error) {
-        console.error('Error saving profile:', error);
-        showNotification('Ошибка подключения к серверу');
+        console.error('Save profile error:', error);
+        showNotification('Ошибка подключения');
+    } finally {
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.textContent = 'Сохранить изменения';
+        }
     }
 }
 
