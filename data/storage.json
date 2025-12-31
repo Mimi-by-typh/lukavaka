@@ -2,7 +2,9 @@
   "comments": [],
   "users": {},
   "onlineSessions": {},
-  "adminEmails": ["dalinnatasha6@gmail.com"],
+  "adminEmails": [
+    "dalinnatasha6@gmail.com"
+  ],
   "roles": [],
   "userRoles": {}
 }
