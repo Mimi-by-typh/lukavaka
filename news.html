@@ -10,8 +10,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="theme-switcher.css">
+    <style>
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-hole {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .loader-hole i {
+            display: block;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 140px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            opacity: 0;
+            animation: loaderScale 3s linear infinite;
+        }
+        .loader-hole i:nth-child(1) { animation-delay: 0s; }
+        .loader-hole i:nth-child(2) { animation-delay: 0.3s; }
+        .loader-hole i:nth-child(3) { animation-delay: 0.6s; }
+        .loader-hole i:nth-child(4) { animation-delay: 0.9s; }
+        .loader-hole i:nth-child(5) { animation-delay: 1.2s; }
+        .loader-hole i:nth-child(6) { animation-delay: 1.5s; }
+        .loader-hole i:nth-child(7) { animation-delay: 1.8s; }
+        .loader-hole i:nth-child(8) { animation-delay: 2.1s; }
+        .loader-hole i:nth-child(9) { animation-delay: 2.4s; }
+        .loader-hole i:nth-child(10) { animation-delay: 2.7s; }
+        @keyframes loaderScale {
+            0% {
+                transform: scale(2);
+                opacity: 0;
+                box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
+            }
+            50% {
+                transform: scale(1) translateY(-5px);
+                opacity: 1;
+                box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+            }
+            100% {
+                transform: scale(0.1) translateY(5px);
+                opacity: 0;
+                box-shadow: 0 10px 20px rgba(139, 92, 246, 0);
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-hole">
+            <i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i>
+        </div>
+    </div>
+
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
@@ -39,7 +107,7 @@
             <article class="news-card">
                 <div class="news-header">
                     <h2>🚀 Запуск сайта!</h2>
-                    <span class="news-date">28 декабря 2024</span>
+                    <span class="news-date">28 декабря 2025</span>
                 </div>
                 <p>Йоу, сайт наконец-то запущен! Теперь все новости, обновления и движухи будут тут. Подписывайтесь, следите, не пропустите ничего важного.</p>
                 <p style="margin-top: 1rem;">VIP DEF уже доступен — осталось 15 мест. Кто первый — тот и папочка.</p>
@@ -52,7 +120,7 @@
             <article class="news-card">
                 <div class="news-header">
                     <h2>🛡️ VIP DEF открыт</h2>
-                    <span class="news-date">28 декабря 2024</span>
+                    <span class="news-date">28 декабря 2025</span>
                 </div>
                 <p>VIP защита от клана Europe и Luka Frizz теперь доступна. 100 звёзд в месяц — и тебя не пошлют нахуй. Плюс возможность сесть на обучение в КМ.</p>
                 <p style="margin-top: 1rem;">Свободных мест: 15. Больше плюсов нет, но и этого достаточно.</p>
@@ -86,6 +154,12 @@
         
         const activeLink = document.querySelector('.nav-links a.active');
         if (activeLink) moveGlider(activeLink);
+        
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 800);
+        });
     </script>
 </body>
 </html>
