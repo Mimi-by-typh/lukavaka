@@ -1,7 +1,12 @@
 {
   "comments": [],
   "users": {},
-  "onlineSessions": {},
+  "onlineSessions": {
+    "ses_mjtmx36inzhvu": {
+      "userId": "guest",
+      "lastActivity": 1767162489749
+    }
+  },
   "adminEmails": [
     "dalinnatasha6@gmail.com"
   ],
