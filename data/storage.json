@@ -15,7 +15,12 @@
     }
   ],
   "users": {},
-  "onlineSessions": {},
+  "onlineSessions": {
+    "ses_mjpplyndaqfbz": {
+      "userId": "guest",
+      "lastActivity": 1767163068786
+    }
+  },
   "adminEmails": [
     "dalinnatasha6@gmail.com"
   ],
