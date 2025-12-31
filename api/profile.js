@@ -1,4 +1,4 @@
-const db = require('../lib/db');
+const db = require('../lib/database');
 
 function verifyAuth(req) {
     const authHeader = req.headers.authorization;

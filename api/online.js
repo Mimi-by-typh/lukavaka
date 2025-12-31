@@ -1,4 +1,4 @@
-const db = require('../lib/db');
+const db = require('../lib/database');
 
 // Таймаут неактивности - 15 секунд (если нет heartbeat - сессия мертва)
 const SESSION_TIMEOUT = 15 * 1000;

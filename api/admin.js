@@ -1,4 +1,4 @@
-const db = require('../lib/db');
+const db = require('../lib/database');
 
 async function isAdmin(email) {
     const adminEmails = await db.getAdminEmails();

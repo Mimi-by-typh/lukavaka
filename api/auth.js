@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const db = require('../lib/db');
+const db = require('../lib/database');
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
