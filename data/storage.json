@@ -1,5 +1,19 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "id": 1767162542325,
+      "author": "Natasha",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocIFCxQM9TpeLpknDOI-Lr9R2UnloO9lkzze_YUx5rcgadwgVw=s96-c",
+      "text": "хуй",
+      "date": "2025-12-31T06:29:02.325Z",
+      "userId": "google_103777673081395786201",
+      "isAdmin": false,
+      "status": "published",
+      "role": null,
+      "customPrefix": null,
+      "prefixColor": null
+    }
+  ],
   "users": {},
   "onlineSessions": {
     "ses_mjpplyndaqfbz": {
