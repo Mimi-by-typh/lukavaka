@@ -40,7 +40,19 @@
       "prefixColor": null
     }
   ],
-  "users": {},
+  "users": {
+    "google_103777673081395786201": {
+      "id": "google_103777673081395786201",
+      "username": "Natasha",
+      "firstName": "Natasha",
+      "lastName": "Dalin",
+      "email": "dalinnatasha6@gmail.com",
+      "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIFCxQM9TpeLpknDOI-Lr9R2UnloO9lkzze_YUx5rcgadwgVw=s96-c",
+      "provider": "google",
+      "createdAt": "2026-01-01T12:47:03.474Z",
+      "updatedAt": "2026-01-01T12:47:03.658Z"
+    }
+  },
   "onlineSessions": {
     "ses_mjpplyndaqfbz": {
       "userId": "guest",
