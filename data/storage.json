@@ -53,7 +53,12 @@
       "updatedAt": "2026-01-01T12:47:03.658Z"
     }
   },
-  "onlineSessions": {},
+  "onlineSessions": {
+    "ses_mjpplyndaqfbz": {
+      "userId": "guest",
+      "lastActivity": 1767514922557
+    }
+  },
   "adminEmails": [
     "dalinnatasha6@gmail.com"
   ],
